@@ -1,11 +1,29 @@
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from jose import jwt
 from datetime import datetime, timedelta
 import httpx
 
 app = FastAPI()
-SECRET_KEY = "your-secret-key"
+
+# Add CORS middleware
+origins = [
+    "http://localhost:8000",  # Allow your auth-gateway to access
+    "http://127.0.0.1:8000",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+SECRET_KEY = "supersecret"
 ALGORITHM = "HS256"
 
 fake_users_db = {}
@@ -41,7 +59,7 @@ def login(user: UserLogin):
         SECRET_KEY,
         algorithm=ALGORITHM
     )
-    return {"access_token": token}
+    return {"access_token": token, "token_type": "bearer"}
 
 @app.get("/users")
 def get_users():

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Auction Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="auth-section" class="section">
+            <h2>Authentication</h2>
+            <div id="login-form">
+                <h3>Login</h3>
+                <input type="email" id="login-email" placeholder="Email">
+                <input type="password" id="login-password" placeholder="Password">
+                <button onclick="login()">Login</button>
+            </div>
+            <div id="register-form">
+                <h3>Register</h3>
+                <input type="text" id="register-name" placeholder="Name">
+                <input type="email" id="register-email" placeholder="Email">
+                <input type="password" id="register-password" placeholder="Password">
+                <button onclick="register()">Register</button>
+            </div>
+        </div>
+
+        <div id="auction-section" class="section hidden">
+            <div class="header">
+                <h2>Auctions</h2>
+                <button onclick="logout()">Logout</button>
+            </div>
+
+            <div id="create-auction-form">
+                <h3>Create New Auction</h3>
+                <input type="text" id="auction-title" placeholder="Title">
+                <textarea id="auction-description" placeholder="Description"></textarea>
+                <input type="number" id="auction-price" placeholder="Starting Price">
+                <input type="datetime-local" id="auction-end-time">
+                <button onclick="createAuction()">Create Auction</button>
+            </div>
+
+            <div id="auctions-list">
+                <h3>Active Auctions</h3>
+                <div id="auctions-container"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
